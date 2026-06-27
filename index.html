@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo — Minha Loja</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <div class="header-inner">
+      <p class="header-eyebrow">nova coleção</p>
+      <h1 class="header-title">Minha Loja</h1>
+      <p class="header-sub">Selecione os itens que deseja e envie seu pedido pelo WhatsApp 🌸</p>
+    </div>
+  </header>
+
+  <!-- FILTROS -->
+  <nav class="filtros" id="filtros">
+    <button class="filtro-btn ativo" data-cat="Todos">Todos</button>
+  </nav>
+
+  <!-- GRID DE PRODUTOS -->
+  <main class="grid" id="grid"></main>
+
+  <!-- RODAPÉ CARRINHO (fixo no mobile) -->
+  <div class="carrinho-bar" id="carrinhoBar">
+    <div class="carrinho-info">
+      <span id="carrinhoCount">0 itens</span>
+      <span id="carrinhoTotal">R$ 0,00</span>
+    </div>
+    <button class="btn-pedido" id="btnPedido">Ver pedido →</button>
+  </div>
+
+  <!-- MODAL PEDIDO -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal">
+      <button class="modal-fechar" id="modalFechar">✕</button>
+      <h2 class="modal-titulo">Seu Pedido</h2>
+      <div id="modalItens"></div>
+      <div class="modal-total">
+        <span>Total</span>
+        <span id="modalTotalValor"></span>
+      </div>
+      <p class="modal-instrucao">Copie o resumo abaixo e cole no WhatsApp:</p>
+      <textarea class="modal-texto" id="modalTexto" readonly></textarea>
+      <div class="modal-acoes">
+        <button class="btn-copiar" id="btnCopiar">Copiar resumo</button>
+        <button class="btn-whats" id="btnWhats">Abrir WhatsApp</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/catalogo.js"></script>
+</body>
+</html>

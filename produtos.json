@@ -1,0 +1,56 @@
+[
+  {
+    "id": 1,
+    "nome": "Conjunto Floral Verão",
+    "categoria": "Conjuntos",
+    "preco": 89.90,
+    "descricao": "Blusa + short floral, tecido leve e fresco",
+    "disponivel": true,
+    "imagem": "https://placehold.co/400x500/F5E6E0/C8637A?text=Conjunto+Floral"
+  },
+  {
+    "id": 2,
+    "nome": "Vestido Midi Rose",
+    "categoria": "Vestidos",
+    "preco": 129.90,
+    "descricao": "Vestido midi com fenda lateral, ideal para qualquer ocasião",
+    "disponivel": true,
+    "imagem": "https://placehold.co/400x500/F5E6E0/C8637A?text=Vestido+Midi"
+  },
+  {
+    "id": 3,
+    "nome": "Blusa Cropped Linho",
+    "categoria": "Blusas",
+    "preco": 49.90,
+    "descricao": "Blusa cropped em linho, fresquinha e estilosa",
+    "disponivel": true,
+    "imagem": "https://placehold.co/400x500/F5E6E0/C8637A?text=Blusa+Cropped"
+  },
+  {
+    "id": 4,
+    "nome": "Calça Wide Leg Bege",
+    "categoria": "Calças",
+    "preco": 99.90,
+    "descricao": "Calça pantalona bege, confortável e elegante",
+    "disponivel": true,
+    "imagem": "https://placehold.co/400x500/F5E6E0/C8637A?text=Cal%C3%A7a+Wide"
+  },
+  {
+    "id": 5,
+    "nome": "Saia Midi Plissada",
+    "categoria": "Saias",
+    "preco": 79.90,
+    "descricao": "Saia midi plissada, fluida e romântica",
+    "disponivel": true,
+    "imagem": "https://placehold.co/400x500/F5E6E0/C8637A?text=Saia+Plissada"
+  },
+  {
+    "id": 6,
+    "nome": "Vestido Festa Bordô",
+    "categoria": "Vestidos",
+    "preco": 189.90,
+    "descricao": "Vestido longo com alças finas, perfeito para festas",
+    "disponivel": false,
+    "imagem": "https://placehold.co/400x500/D4A96A/FDFAF9?text=Esgotado"
+  }
+]
