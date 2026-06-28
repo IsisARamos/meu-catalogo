@@ -3,7 +3,7 @@
     "id": 1,
     "nome": "Pijama puff",
     "categoria": "Pijamas",
-    "preco": 55,00,
+    "preco": 55.00,
     "descricao": "blusinha cropped e short, tecido leve e fresco",
     "disponivel": true,
     "imagem": "https://http2.mlstatic.com/D_NQ_NP_2X_743683-MLB97944987442_112025-F-conjunto-pijama-feminino-adulto-ursinho-puff-blusa-e-short.webp"
@@ -12,7 +12,7 @@
     "id": 2,
     "nome": "calcinha borboleta",
     "categoria": "Calcinhas",
-    "preco": 40,00,
+    "preco": 40.00,
     "descricao": "Calcinha Borboleta fio",
     "disponivel": true,
     "imagem": "https://dcdn-us.mitiendanube.com/stores/002/971/987/products/img_3510-e6e488c98ebc43f3fe17800773266096-480-0.webp"
@@ -39,7 +39,7 @@
     "id": 5,
     "nome": "Pijama peluciado",
     "categoria": "Pijamas",
-    "preco": 200,00
+    "preco": 200.00,
     "descricao": "pijama peluciado rosa",
     "disponivel": true,
     "imagem": "https://www.casaassuf.com.br/wp-content/uploads/2021/06/tecidos-mais-indicados-para-pijamas-de-inverno-casa-assuf-foto-reproducao-internet3.jpg"
@@ -48,7 +48,7 @@
     "id": 6,
     "nome": "Splash vitória secrets Coconutt Passion",
     "categoria": "Perfumaria",
-    "preco": 200,00
+    "preco": 200.00,
     "descricao": "",
     "disponivel": false,
     "imagem": "https://http2.mlstatic.com/D_NQ_NP_737833-MLB112280606863_052026-O.webp"
