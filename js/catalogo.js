@@ -1,7 +1,7 @@
 // =============================================
 // CONFIGURAÇÃO — edite o número do WhatsApp
 // =============================================
-const WHATSAPP = "5551999999999"; // formato: 55 + DDD + número (sem espaços)
+const WHATSAPP = "5551986489731"; // formato: 55 + DDD + número (sem espaços)
 const NOME_LOJA = "Minha Loja";
 
 // =============================================
