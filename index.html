@@ -1,9 +1,10 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Catálogo — Use Isis </title>
+  <title>Catálogo — Use Isis</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -11,7 +12,6 @@
 </head>
 <body>
 
-  <!-- HEADER -->
   <header class="header">
     <div class="header-inner">
       <p class="header-eyebrow">Minha Coleção</p>
@@ -20,15 +20,13 @@
     </div>
   </header>
 
-  <!-- FILTROS -->
   <nav class="filtros" id="filtros">
     <button class="filtro-btn ativo" data-cat="Todos">Todos</button>
   </nav>
 
-  <!-- GRID DE PRODUTOS -->
+
   <main class="grid" id="grid"></main>
 
-  <!-- RODAPÉ CARRINHO (fixo no mobile) -->
   <div class="carrinho-bar" id="carrinhoBar">
     <div class="carrinho-info">
       <span id="carrinhoCount">0 itens</span>
@@ -37,7 +35,6 @@
     <button class="btn-pedido" id="btnPedido">Ver pedido →</button>
   </div>
 
-  <!-- MODAL PEDIDO -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
       <button class="modal-fechar" id="modalFechar">✕</button>
@@ -54,6 +51,16 @@
         <button class="btn-whats" id="btnWhats">Abrir WhatsApp</button>
       </div>
     </div>
+  </div>
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-fechar" id="lightboxFechar">✕</button>
+    <img class="lightbox-img" id="lightboxImg" src="" alt="" />
+    <div class="lightbox-info">
+      <p class="lightbox-nome" id="lightboxNome"></p>
+      <p class="lightbox-preco" id="lightboxPreco"></p>
+    </div>
+    <button class="lightbox-whats" id="lightboxWhats"><i class="fab fa-whatsapp"></i> Pedir pelo WhatsApp</button>
   </div>
 
   <script src="js/catalogo.js"></script>
