@@ -1,19 +1,11 @@
-// =============================================
-// CONFIGURAÇÃO — edite o número do WhatsApp
-// =============================================
-const WHATSAPP = "5551986489731"; // formato: 55 + DDD + número (sem espaços)
-const NOME_LOJA = "Minha Loja";
 
-// =============================================
-// ESTADO
-// =============================================
+const WHATSAPP = "5551986489731";
+const NOME_LOJA = "Use Isis";
+
 let produtos = [];
-let carrinho = []; // Array de IDs selecionados
+let carrinho = [];
 let filtroAtivo = "Todos";
 
-// =============================================
-// INICIALIZAÇÃO
-// =============================================
 async function init() {
   try {
     const res = await fetch("produtos.json");
@@ -26,9 +18,6 @@ async function init() {
   }
 }
 
-// =============================================
-// FILTROS
-// =============================================
 function renderFiltros() {
   const cats = ["Todos", ...new Set(produtos.map(p => p.categoria))];
   const nav = document.getElementById("filtros");
@@ -45,9 +34,6 @@ function renderFiltros() {
   });
 }
 
-// =============================================
-// GRID DE PRODUTOS
-// =============================================
 function renderGrid() {
   const lista = filtroAtivo === "Todos"
     ? produtos
@@ -59,7 +45,7 @@ function renderGrid() {
     const esg = !p.disponivel;
     return `
       <div class="card${esg ? " esgotado" : ""}${sel ? " selecionado" : ""}" data-id="${p.id}">
-        <img class="card-img" src="${p.imagem}" alt="${p.nome}" loading="lazy" />
+        <img class="card-img" src="${p.imagem}" alt="${p.nome}" loading="lazy" data-lightbox="${p.id}" />
         ${esg ? '<span class="badge-esgotado">Esgotado</span>' : ""}
         ${sel ? '<span class="badge-sel">✓</span>' : ""}
         <div class="card-corpo">
@@ -82,15 +68,18 @@ function renderGrid() {
   grid.querySelectorAll(".card-btn").forEach(btn => {
     btn.addEventListener("click", e => {
       e.stopPropagation();
-      const id = Number(btn.dataset.id);
-      toggleCarrinho(id);
+      toggleCarrinho(Number(btn.dataset.id));
+    });
+  });
+
+  grid.querySelectorAll(".card-img[data-lightbox]").forEach(img => {
+    img.addEventListener("click", () => {
+      const id = Number(img.dataset.lightbox);
+      abrirLightbox(id);
     });
   });
 }
 
-// =============================================
-// CARRINHO
-// =============================================
 function toggleCarrinho(id) {
   const idx = carrinho.indexOf(id);
   if (idx === -1) carrinho.push(id);
@@ -105,17 +94,42 @@ function atualizarBarra() {
   const total = document.getElementById("carrinhoTotal");
   const itens = carrinho.map(id => produtos.find(p => p.id === id)).filter(Boolean);
   const soma = itens.reduce((s, p) => s + p.preco, 0);
-
   count.textContent = `${itens.length} ${itens.length === 1 ? "item" : "itens"} selecionado${itens.length === 1 ? "" : "s"}`;
   total.textContent = formatBRL(soma);
-
   if (itens.length > 0) bar.classList.add("visivel");
   else bar.classList.remove("visivel");
 }
 
-// =============================================
-// MODAL PEDIDO
-// =============================================
+
+function abrirLightbox(id) {
+  const p = produtos.find(x => x.id === id);
+  if (!p) return;
+  document.getElementById("lightboxImg").src = p.imagem;
+  document.getElementById("lightboxImg").alt = p.nome;
+  document.getElementById("lightboxNome").textContent = p.nome;
+  document.getElementById("lightboxPreco").textContent = formatBRL(p.preco);
+
+  const btnW = document.getElementById("lightboxWhats");
+  btnW.onclick = () => {
+    const msg = `Olá! Tenho interesse no produto: *${p.nome}* — ${formatBRL(p.preco)} 😊`;
+    window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
+  };
+
+  document.getElementById("lightbox").classList.add("aberto");
+  document.body.style.overflow = "hidden";
+}
+
+function fecharLightbox() {
+  document.getElementById("lightbox").classList.remove("aberto");
+  document.body.style.overflow = "";
+}
+
+document.getElementById("lightboxFechar").addEventListener("click", fecharLightbox);
+document.getElementById("lightbox").addEventListener("click", e => {
+  if (e.target === e.currentTarget) fecharLightbox();
+});
+
+
 document.getElementById("btnPedido").addEventListener("click", abrirModal);
 document.getElementById("modalFechar").addEventListener("click", fecharModal);
 document.getElementById("modalOverlay").addEventListener("click", e => {
@@ -125,16 +139,11 @@ document.getElementById("modalOverlay").addEventListener("click", e => {
 function abrirModal() {
   const itens = carrinho.map(id => produtos.find(p => p.id === id)).filter(Boolean);
   const soma = itens.reduce((s, p) => s + p.preco, 0);
-
   document.getElementById("modalItens").innerHTML = itens
     .map(p => `<div class="modal-item"><span>${p.nome}</span><span>${formatBRL(p.preco)}</span></div>`)
     .join("");
-
   document.getElementById("modalTotalValor").textContent = formatBRL(soma);
-
-  const texto = gerarTexto(itens, soma);
-  document.getElementById("modalTexto").value = texto;
-
+  document.getElementById("modalTexto").value = gerarTexto(itens, soma);
   document.getElementById("modalOverlay").classList.add("aberto");
 }
 
@@ -147,7 +156,6 @@ function gerarTexto(itens, soma) {
   return `🛍️ *Pedido — ${NOME_LOJA}*\n\n${linhas}\n\n💰 *Total: ${formatBRL(soma)}*\n\nOlá! Gostaria de fazer este pedido. 😊`;
 }
 
-// COPIAR
 document.getElementById("btnCopiar").addEventListener("click", () => {
   const txt = document.getElementById("modalTexto");
   txt.select();
@@ -158,21 +166,13 @@ document.getElementById("btnCopiar").addEventListener("click", () => {
   });
 });
 
-// WHATSAPP
 document.getElementById("btnWhats").addEventListener("click", () => {
   const texto = document.getElementById("modalTexto").value;
-  const url = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`;
-  window.open(url, "_blank");
+  window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, "_blank");
 });
 
-// =============================================
-// UTILITÁRIOS
-// =============================================
 function formatBRL(v) {
   return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
 
-// =============================================
-// START
-// =============================================
 init();
