@@ -1,4 +1,3 @@
-/* ===== TOKENS ===== */
 :root {
   --nude:    #F5E6E0;
   --creme:   #FDFAF9;
@@ -12,7 +11,6 @@
   --font-body:    'Inter', sans-serif;
 }
 
-/* ===== RESET ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 body {
   font-family: var(--font-body);
@@ -22,7 +20,6 @@ body {
   padding-bottom: 90px;
 }
 
-/* ===== HEADER ===== */
 .header {
   background: var(--nude);
   text-align: center;
@@ -51,7 +48,6 @@ body {
   font-weight: 300;
 }
 
-/* ===== FILTROS ===== */
 .filtros {
   display: flex;
   gap: 8px;
@@ -80,7 +76,6 @@ body {
   font-weight: 500;
 }
 
-/* ===== GRID ===== */
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(165px, 1fr));
@@ -90,7 +85,6 @@ body {
   margin: 0 auto;
 }
 
-/* ===== CARD ===== */
 .card {
   background: white;
   border-radius: 12px;
@@ -112,7 +106,6 @@ body {
   background: var(--nude);
 }
 
-/* Etiqueta assinatura — borda pontilhada inferior */
 .card-corpo {
   padding: 12px 14px 16px;
   border-top: 2px dashed var(--borda);
@@ -191,7 +184,7 @@ body {
   justify-content: center;
 }
 
-/* ===== BARRA CARRINHO ===== */
+
 .carrinho-bar {
   position: fixed;
   bottom: 0; left: 0; right: 0;
@@ -223,7 +216,7 @@ body {
 }
 .btn-pedido:hover { background: var(--rosa-dk); }
 
-/* ===== MODAL ===== */
+
 .modal-overlay {
   position: fixed;
   inset: 0;
@@ -312,3 +305,69 @@ body {
   .modal { border-radius: 20px; margin: 20px; }
   .modal-overlay { align-items: center; }
 }
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,.92);
+  z-index: 300;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .25s;
+}
+.lightbox.aberto { opacity: 1; pointer-events: all; }
+.lightbox-fechar {
+  position: absolute;
+  top: 16px; right: 20px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  opacity: .7;
+}
+.lightbox-fechar:hover { opacity: 1; }
+.lightbox-img {
+  max-width: 100%;
+  max-height: 60vh;
+  object-fit: contain;
+  border-radius: 12px;
+  cursor: zoom-in;
+}
+.lightbox-info {
+  margin-top: 16px;
+  text-align: center;
+}
+.lightbox-nome {
+  font-family: 'Playfair Display', serif;
+  font-size: 20px;
+  color: white;
+  margin-bottom: 4px;
+}
+.lightbox-preco {
+  font-size: 16px;
+  color: var(--dourado);
+  font-weight: 600;
+}
+.lightbox-whats {
+  margin-top: 20px;
+  background: #25D366;
+  color: white;
+  border: none;
+  padding: 14px 32px;
+  border-radius: 30px;
+  font-family: 'Inter', sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: background .2s;
+}
+.lightbox-whats:hover { background: #1ebe5d; }
