@@ -1,3 +1,4 @@
+
 [
   {
     "id": 1,
@@ -10,7 +11,7 @@
   },
   {
     "id": 2,
-    "nome": "calcinha borboleta",
+    "nome": "Calcinha borboleta",
     "categoria": "Calcinhas",
     "preco": 40.00,
     "descricao": "Calcinha Borboleta fio",
@@ -19,7 +20,7 @@
   },
   {
     "id": 3,
-    "nome": "lanjerie renda + cinta liga",
+    "nome": "Lanjerie renda + cinta liga",
     "categoria": "Calcinhas",
     "preco": 49.90,
     "descricao": "lanjerie veste muito bem, renda super leve",
@@ -46,10 +47,10 @@
   },
   {
     "id": 6,
-    "nome": "Splash vitória secrets Coconutt Passion",
+    "nome": "Splash Victoria's Secret Coconut Passion",
     "categoria": "Perfumaria",
     "preco": 200.00,
-    "descricao": "",
+    "descricao": "Body splash Victoria's Secret",
     "disponivel": false,
     "imagem": "https://http2.mlstatic.com/D_NQ_NP_737833-MLB112280606863_052026-O.webp"
   }
