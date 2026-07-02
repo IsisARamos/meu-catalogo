@@ -1,11 +1,11 @@
 
 const WHATSAPP = "5551986489731";
 const NOME_LOJA = "Use Isis";
-
+ 
 let produtos = [];
 let carrinho = [];
 let filtroAtivo = "Todos";
-
+ 
 async function init() {
   try {
     const res = await fetch("produtos.json");
@@ -17,7 +17,7 @@ async function init() {
       '<p style="padding:20px;color:#888">Erro ao carregar produtos.</p>';
   }
 }
-
+ 
 function renderFiltros() {
   const cats = ["Todos", ...new Set(produtos.map(p => p.categoria))];
   const nav = document.getElementById("filtros");
@@ -33,12 +33,12 @@ function renderFiltros() {
     });
   });
 }
-
+ 
 function renderGrid() {
   const lista = filtroAtivo === "Todos"
     ? produtos
     : produtos.filter(p => p.categoria === filtroAtivo);
-
+ 
   const grid = document.getElementById("grid");
   grid.innerHTML = lista.map(p => {
     const sel = carrinho.includes(p.id);
@@ -64,14 +64,14 @@ function renderGrid() {
         </div>
       </div>`;
   }).join("");
-
+ 
   grid.querySelectorAll(".card-btn").forEach(btn => {
     btn.addEventListener("click", e => {
       e.stopPropagation();
       toggleCarrinho(Number(btn.dataset.id));
     });
   });
-
+ 
   grid.querySelectorAll(".card-img[data-lightbox]").forEach(img => {
     img.addEventListener("click", () => {
       const id = Number(img.dataset.lightbox);
@@ -79,7 +79,7 @@ function renderGrid() {
     });
   });
 }
-
+ 
 function toggleCarrinho(id) {
   const idx = carrinho.indexOf(id);
   if (idx === -1) carrinho.push(id);
@@ -87,7 +87,7 @@ function toggleCarrinho(id) {
   renderGrid();
   atualizarBarra();
 }
-
+ 
 function atualizarBarra() {
   const bar = document.getElementById("carrinhoBar");
   const count = document.getElementById("carrinhoCount");
@@ -99,8 +99,8 @@ function atualizarBarra() {
   if (itens.length > 0) bar.classList.add("visivel");
   else bar.classList.remove("visivel");
 }
-
-
+ 
+// LIGHTBOX
 function abrirLightbox(id) {
   const p = produtos.find(x => x.id === id);
   if (!p) return;
@@ -108,34 +108,34 @@ function abrirLightbox(id) {
   document.getElementById("lightboxImg").alt = p.nome;
   document.getElementById("lightboxNome").textContent = p.nome;
   document.getElementById("lightboxPreco").textContent = formatBRL(p.preco);
-
+ 
   const btnW = document.getElementById("lightboxWhats");
   btnW.onclick = () => {
     const msg = `Olá! Tenho interesse no produto: *${p.nome}* — ${formatBRL(p.preco)} 😊`;
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
   };
-
+ 
   document.getElementById("lightbox").classList.add("aberto");
   document.body.style.overflow = "hidden";
 }
-
+ 
 function fecharLightbox() {
   document.getElementById("lightbox").classList.remove("aberto");
   document.body.style.overflow = "";
 }
-
+ 
 document.getElementById("lightboxFechar").addEventListener("click", fecharLightbox);
 document.getElementById("lightbox").addEventListener("click", e => {
   if (e.target === e.currentTarget) fecharLightbox();
 });
-
-
+ 
+// MODAL PEDIDO
 document.getElementById("btnPedido").addEventListener("click", abrirModal);
 document.getElementById("modalFechar").addEventListener("click", fecharModal);
 document.getElementById("modalOverlay").addEventListener("click", e => {
   if (e.target === e.currentTarget) fecharModal();
 });
-
+ 
 function abrirModal() {
   const itens = carrinho.map(id => produtos.find(p => p.id === id)).filter(Boolean);
   const soma = itens.reduce((s, p) => s + p.preco, 0);
@@ -146,16 +146,16 @@ function abrirModal() {
   document.getElementById("modalTexto").value = gerarTexto(itens, soma);
   document.getElementById("modalOverlay").classList.add("aberto");
 }
-
+ 
 function fecharModal() {
   document.getElementById("modalOverlay").classList.remove("aberto");
 }
-
+ 
 function gerarTexto(itens, soma) {
   const linhas = itens.map((p, i) => `${i + 1}. ${p.nome} — ${formatBRL(p.preco)}`).join("\n");
   return `🛍️ *Pedido — ${NOME_LOJA}*\n\n${linhas}\n\n💰 *Total: ${formatBRL(soma)}*\n\nOlá! Gostaria de fazer este pedido. 😊`;
 }
-
+ 
 document.getElementById("btnCopiar").addEventListener("click", () => {
   const txt = document.getElementById("modalTexto");
   txt.select();
@@ -165,14 +165,14 @@ document.getElementById("btnCopiar").addEventListener("click", () => {
     setTimeout(() => btn.textContent = "Copiar resumo", 2000);
   });
 });
-
+ 
 document.getElementById("btnWhats").addEventListener("click", () => {
   const texto = document.getElementById("modalTexto").value;
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, "_blank");
 });
-
+ 
 function formatBRL(v) {
   return v.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
 }
-
+ 
 init();
