@@ -52,17 +52,20 @@ function renderGrid() {
           <p class="card-cat">${p.categoria}</p>
           <h2 class="card-nome">${p.nome}</h2>
           <p class="card-desc">${p.descricao}</p>
-          <div class="card-rodape">
-            <span class="card-preco">${formatBRL(p.preco)}</span>
-            ${esg
-              ? ""
-              : sel
-                ? `<button class="card-btn rem" data-id="${p.id}" title="Remover">−</button>`
-                : `<button class="card-btn" data-id="${p.id}" title="Adicionar">+</button>`
-            }
-          </div>
-        </div>
-      </div>`;
+       <div class="card-rodape">
+  <span class="card-preco">${formatBRL(p.preco)}</span>
+  <div style="display:flex;gap:6px;align-items:center;">
+    ${esg
+      ? ""
+      : sel
+        ? `<button class="card-btn rem" data-id="${p.id}" title="Remover">−</button>`
+        : `<button class="card-btn" data-id="${p.id}" title="Adicionar">+</button>`
+    }
+    ${!esg ? `<button class="card-whats" data-id="${p.id}" title="WhatsApp">
+      <i class="fab fa-whatsapp"></i>
+    </button>` : ""}
+  </div>
+</div>;
   }).join("");
  
   grid.querySelectorAll(".card-btn").forEach(btn => {
