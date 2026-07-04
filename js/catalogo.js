@@ -163,16 +163,13 @@ function abrirModal() {
   document.getElementById("modalOverlay").classList.add("aberto");
 }
  
-function fecharModal() {
-  document.getElementById("modalOverlay").classList.remove("aberto");
-  document.getElementById("btnLimpar").addEventListener("click", () => {
+document.getElementById("btnLimpar").addEventListener("click", () => {
   carrinho = [];
   localStorage.removeItem("carrinho");
   renderGrid();
   atualizarBarra();
   fecharModal();
 });
-}
  
 function gerarTexto(itens, soma) {
   const linhas = itens.map((p, i) => `${i + 1}. ${p.nome} — ${formatBRL(p.preco)}`).join("\n");
