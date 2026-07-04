@@ -354,20 +354,20 @@ body {
   color: var(--dourado);
   font-weight: 600;
 }
-.lightbox-whats {
-  margin-top: 20px;
+.lightbox-whats:hover { background: #1ebe5d; }
+
+.card-whats {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
   background: #25D366;
   color: white;
-  border: none;
-  padding: 14px 32px;
-  border-radius: 30px;
-  font-family: 'Inter', sans-serif;
-  font-size: 15px;
-  font-weight: 500;
+  font-size: 16px;
   cursor: pointer;
   display: flex;
   align-items: center;
-  gap: 8px;
+  justify-content: center;
   transition: background .2s;
 }
-.lightbox-whats:hover { background: #1ebe5d; }
+.card-whats:hover { background: #1ebe5d; }
