@@ -1,4 +1,6 @@
 
+ 
+
 const WHATSAPP = "5551986489731";
 const NOME_LOJA = "Use Isis";
  
@@ -161,12 +163,6 @@ function abrirModal() {
   document.getElementById("modalTotalValor").textContent = formatBRL(soma);
   document.getElementById("modalTexto").value = gerarTexto(itens, soma);
   document.getElementById("modalOverlay").classList.add("aberto");
-  carrinho = [];
-  localStorage.removeItem("carrinho");
-  renderGrid();
-  atualizarBarra();
-  fecharModal();
-};
 }
  
 document.getElementById("btnLimpar").addEventListener("click", () => {
@@ -202,4 +198,3 @@ function formatBRL(v) {
 }
  
 init();
- 
