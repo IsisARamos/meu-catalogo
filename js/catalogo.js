@@ -5,6 +5,7 @@ const NOME_LOJA = "Use Isis";
 let produtos = [];
 let carrinho = [];
 let filtroAtivo = "Todos";
+carrinho = JSON.parse(localStorage.getItem('carrinho') || '[]');
  
 async function init() {
   try {
@@ -100,6 +101,8 @@ function toggleCarrinho(id) {
   else carrinho.splice(idx, 1);
   renderGrid();
   atualizarBarra();
+ localStorage.setItem('carrinho', JSON.stringify(carrinho));
+ 
 }
  
 function atualizarBarra() {
