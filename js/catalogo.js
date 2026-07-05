@@ -104,6 +104,11 @@ function toggleCarrinho(id) {
   renderGrid();
   atualizarBarra();
  localStorage.setItem('carrinho', JSON.stringify(carrinho));
+ const btn = document.querySelector(`[data-id="${id}"].card-btn`);
+if (btn) {
+  btn.classList.add("animando");
+  setTimeout(() => btn.classList.remove("animando"), 300);
+}
  
 }
  
