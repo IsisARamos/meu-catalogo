@@ -371,3 +371,12 @@ body {
   transition: background .2s;
 }
 .card-whats:hover { background: #1ebe5d; }
+
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.4); }
+  100% { transform: scale(1); }
+}
+.card-btn.animando {
+  animation: pulse 0.3s ease;
+}
