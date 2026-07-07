@@ -1,3 +1,4 @@
+
 :root {
   --nude:       #F5E6E0;
   --creme:      #FDFAF9;
@@ -20,6 +21,8 @@ body.dark {
   --text:    #F5E6E0;
   --borda:   #3a3a3a;
   --cinza:   #aaa;
+  --grafite: #1a1a1a;
+  --nude:    #2a2a2a;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -101,6 +104,7 @@ body {
   border-radius: 50%;
   background: rgba(255,255,255,.4);
   cursor: pointer;
+  border: none;
   transition: background .2s;
 }
 .banner-dot.ativo { background: var(--dourado); }
@@ -116,6 +120,7 @@ body {
   border-bottom: 1px solid var(--borda);
   position: relative;
   overflow: hidden;
+  transition: background .3s;
 }
 .progresso-fill {
   position: absolute;
@@ -275,7 +280,6 @@ body {
 .card-btn:hover { background: var(--dourado-dk); }
 .card-btn.rem { background: var(--grafite); font-size: 16px; }
 
-/* Animação pulso */
 @keyframes pulse {
   0%   { transform: scale(1); }
   50%  { transform: scale(1.4); }
@@ -283,7 +287,6 @@ body {
 }
 .card-btn.animando { animation: pulse 0.3s ease; }
 
-/* Botão favorito no card */
 .card-fav {
   position: absolute;
   top: 10px; left: 10px;
@@ -347,7 +350,7 @@ body {
   align-items: center;
   justify-content: space-between;
   transform: translateY(100%);
-  transition: transform .3s;
+  transition: transform .3s, background .3s;
   z-index: 100;
 }
 .carrinho-bar.visivel { transform: translateY(0); }
