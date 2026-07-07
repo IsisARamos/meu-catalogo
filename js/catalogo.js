@@ -102,6 +102,9 @@ function initDarkMode() {
     localStorage.setItem("darkMode", isDark ? "1" : "0");
     const icon = document.querySelector("#darkToggle i");
     icon.className = isDark ? "fas fa-sun" : "fas fa-moon";
+    document.querySelectorAll(".header-texto").forEach(el => {
+  el.style.color = isDark ? "#C49A6C" : "#8B5E3C";
+});
   });
 }
 // ===================== FILTROS =====================
