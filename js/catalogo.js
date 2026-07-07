@@ -1,4 +1,3 @@
-
 const WHATSAPP = "5551986489731";
 const NOME_LOJA = "Use Isis";
 const MAX_ITENS = 10;
@@ -90,19 +89,20 @@ function irParaSlide(idx) {
 
 // ===================== DARK MODE =====================
 function initDarkMode() {
+  const header = document.getElementById("siteHeader");
   const dark = localStorage.getItem("darkMode") === "1";
-  if (dark) document.body.classList.add("dark");
+  if (dark) {
+    document.body.classList.add("dark");
+    if (header) header.style.background = "#1a1a1a";
+  }
+
   document.getElementById("darkToggle").addEventListener("click", () => {
     document.body.classList.toggle("dark");
-    const header = document.getElementById("siteHeader");
-    if (document.body.classList.contains("dark")) {
-    header.style.background = "#1a1a1a";
-  } else {
-  header.style.background = "#2D2D2D";
-}
-    localStorage.setItem("darkMode", document.body.classList.contains("dark") ? "1" : "0");
+    const isDark = document.body.classList.contains("dark");
+    if (header) header.style.background = isDark ? "#1a1a1a" : "#2D2D2D";
+    localStorage.setItem("darkMode", isDark ? "1" : "0");
     const icon = document.querySelector("#darkToggle i");
-    icon.className = document.body.classList.contains("dark") ? "fas fa-sun" : "fas fa-moon";
+    icon.className = isDark ? "fas fa-sun" : "fas fa-moon";
   });
 }
 
