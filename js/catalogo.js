@@ -95,17 +95,15 @@ function initDarkMode() {
     document.body.classList.add("dark");
     if (header) header.style.background = "#1a1a1a";
   }
-
   document.getElementById("darkToggle").addEventListener("click", () => {
     document.body.classList.toggle("dark");
     const isDark = document.body.classList.contains("dark");
-    if (header) header.style.background = isDark ? "#1a1a1a" : "#2D2D2D";
+    if (header) header.style.background = isDark ? "#1a1a1a" : "#F5E6E0";
     localStorage.setItem("darkMode", isDark ? "1" : "0");
     const icon = document.querySelector("#darkToggle i");
     icon.className = isDark ? "fas fa-sun" : "fas fa-moon";
   });
 }
-
 // ===================== FILTROS =====================
 function renderFiltros() {
   const cats = ["Todos", ...new Set(produtos.map(p => p.categoria))];
