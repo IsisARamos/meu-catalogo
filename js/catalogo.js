@@ -1,3 +1,4 @@
+
 const WHATSAPP = "5551986489731";
 const NOME_LOJA = "Use Isis";
 const MAX_ITENS = 10;
@@ -11,7 +12,6 @@ let mostrarFavoritos = false;
 let bannerAtual = 0;
 let bannerTimer = null;
 
-// ===================== INIT =====================
 async function init() {
   try {
     const res = await fetch("produtos.json");
@@ -27,39 +27,53 @@ async function init() {
   }
 }
 
-// ===================== BANNER =====================
+// ===================== BANNER INFORMATIVO =====================
 function initBanner() {
+  const slides = [
+    {
+      eyebrow: "sono & bem-estar",
+      titulo: "Um bom pijama transforma sua noite.",
+      texto: "Tecidos macios e confortáveis regulam a temperatura do corpo, ajudam a relaxar e melhoram a qualidade do sono. Você merece dormir bem.",
+      bg: "linear-gradient(135deg,#2a1a1a,#3d2020)"
+    },
+    {
+      eyebrow: "perfumaria & autoestima",
+      titulo: "Um bom perfume é presença antes mesmo das palavras.",
+      texto: "Fragrâncias impactam o humor, a confiança e como somos lembradas. Usar um perfume que você ama é um ato de cuidado consigo mesma.",
+      bg: "linear-gradient(135deg,#1a1a2a,#20203d)"
+    },
+    {
+      eyebrow: "lingerie & confiança",
+      titulo: "Vestir uma boa lingerie é se sentir poderosa por dentro.",
+      texto: "Não é só para os outros — é para você. Uma lingerie bonita eleva a autoestima, desperta sensualidade e celebra seu corpo do jeito que ele merece.",
+      bg: "linear-gradient(135deg,#2a1a22,#3d2030)"
+    }
+  ];
+
   const track = document.getElementById("bannerTrack");
   const dots = document.getElementById("bannerDots");
-  const disponiveis = produtos.filter(p => p.disponivel && p.imagem);
 
-  disponiveis.forEach((p, i) => {
-    const slide = document.createElement("div");
-    slide.className = "banner-slide";
-    slide.innerHTML = `
-      <img src="${p.imagem}" alt="${p.nome}" />
-      <div class="banner-slide-info">
-        <p>${p.nome}</p>
-        <span>${formatBRL(p.preco)}</span>
-      </div>`;
-    track.appendChild(slide);
+  track.innerHTML = slides.map(s => `
+    <div class="banner-slide" style="background:${s.bg};display:flex;flex-direction:column;align-items:center;justify-content:center;padding:28px 40px;text-align:center;">
+      <p style="font-size:10px;letter-spacing:4px;color:#D4A96A;text-transform:uppercase;margin:0 0 10px;font-family:'Inter',sans-serif;">${s.eyebrow}</p>
+      <p style="font-family:'Playfair Display',serif;font-size:18px;color:#F5E6E0;margin:0 0 10px;line-height:1.4;">${s.titulo}</p>
+      <p style="font-size:13px;color:#aaa;margin:0;line-height:1.6;font-family:'Inter',sans-serif;">${s.texto}</p>
+    </div>`).join("");
 
-    const dot = document.createElement("button");
-    dot.className = "banner-dot" + (i === 0 ? " ativo" : "");
-    dot.addEventListener("click", () => irParaSlide(i));
-    dots.appendChild(dot);
-  });
+  dots.innerHTML = slides.map((_, i) =>
+    `<button class="banner-dot${i === 0 ? " ativo" : ""}" onclick="irParaSlide(${i})"></button>`
+  ).join("");
 
   document.getElementById("bannerPrev").addEventListener("click", () => {
-    irParaSlide((bannerAtual - 1 + disponiveis.length) % disponiveis.length);
+    irParaSlide((bannerAtual - 1 + slides.length) % slides.length);
   });
   document.getElementById("bannerNext").addEventListener("click", () => {
-    irParaSlide((bannerAtual + 1) % disponiveis.length);
+    irParaSlide((bannerAtual + 1) % slides.length);
   });
 
   bannerTimer = setInterval(() => {
-    irParaSlide((bannerAtual + 1) % disponiveis.length);
-  }, 3500);
+    irParaSlide((bannerAtual + 1) % slides.length);
+  }, 4000);
 }
 
 function irParaSlide(idx) {
@@ -68,6 +82,10 @@ function irParaSlide(idx) {
   document.querySelectorAll(".banner-dot").forEach((d, i) => {
     d.classList.toggle("ativo", i === idx);
   });
+  clearInterval(bannerTimer);
+  bannerTimer = setInterval(() => {
+    irParaSlide((bannerAtual + 1) % 3);
+  }, 4000);
 }
 
 // ===================== DARK MODE =====================
@@ -210,7 +228,6 @@ function atualizarBarra() {
   if (itens.length > 0) bar.classList.add("visivel");
   else bar.classList.remove("visivel");
 
-  // Barra de progresso
   const pct = Math.min((itens.length / MAX_ITENS) * 100, 100);
   document.getElementById("progressoFill").style.width = pct + "%";
   document.getElementById("progressoTexto").textContent =
