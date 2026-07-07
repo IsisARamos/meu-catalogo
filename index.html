@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -11,21 +10,52 @@
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-<header style="background:#2D2D2D;padding:48px 20px 40px;text-align:center;width:100%;">
-   <p style="font-family:'Playfair Display',serif;font-size:14px;font-weight:400;color:#D4A96A;letter-spacing:10px;margin:0 0 4px;text-transform:uppercase;">use</p>
-   <p style="font-family:'Playfair Display',serif;font-size:72px;font-weight:400;color:#F5E6E0;letter-spacing:12px;margin:0;line-height:1;">ISIS</p>
-  <div style="width:60px;height:1px;background:#D4A96A;margin:14px auto;"></div>
-   <p style="font-size:10px;letter-spacing:4px;color:#D4A96A;margin:0 0 16px;text-transform:uppercase;font-family:'Inter',sans-serif;">moda feminina</p>
-   <p style="font-size:13px;color:#8A8A8A;margin:0;font-family:'Inter',sans-serif;">Selecione os itens e envie seu pedido pelo WhatsApp <i class="fab fa-whatsapp" style="color:#25D366;"></i></p>
-</header>
-  
-  <nav class="filtros" id="filtros">
-    <button class="filtro-btn ativo" data-cat="Todos">Todos</button>
-  </nav>
- 
- 
+
+  <!-- HEADER -->
+  <header style="background:#2D2D2D;padding:48px 20px 40px;text-align:center;width:100%;">
+    <p style="font-family:'Playfair Display',serif;font-size:14px;font-weight:400;color:#D4A96A;letter-spacing:10px;margin:0 0 4px;text-transform:uppercase;">use</p>
+    <p style="font-family:'Playfair Display',serif;font-size:72px;font-weight:400;color:#F5E6E0;letter-spacing:12px;margin:0;line-height:1;">ISIS</p>
+    <div style="width:60px;height:1px;background:#D4A96A;margin:14px auto;"></div>
+    <p style="font-size:10px;letter-spacing:4px;color:#D4A96A;margin:0 0 16px;text-transform:uppercase;font-family:'Inter',sans-serif;">moda feminina</p>
+    <p style="font-size:13px;color:#8A8A8A;margin:0;font-family:'Inter',sans-serif;">Selecione os itens e envie seu pedido pelo WhatsApp <i class="fab fa-whatsapp" style="color:#25D366;"></i></p>
+  </header>
+
+  <!-- BANNER ROTATIVO -->
+  <div class="banner-slider">
+    <div class="banner-track" id="bannerTrack"></div>
+    <button class="banner-nav prev" id="bannerPrev">&#8249;</button>
+    <button class="banner-nav next" id="bannerNext">&#8250;</button>
+    <div class="banner-dots" id="bannerDots"></div>
+  </div>
+
+  <!-- BARRA DE PROGRESSO -->
+  <div class="progresso-bar" id="progressoBar">
+    <div class="progresso-fill" id="progressoFill"></div>
+    <span class="progresso-texto" id="progressoTexto">0 itens no carrinho</span>
+  </div>
+
+  <!-- FILTROS -->
+  <div class="filtros-wrapper">
+    <nav class="filtros" id="filtros">
+      <button class="filtro-btn ativo" data-cat="Todos">Todos</button>
+    </nav>
+    <div class="filtros-extra">
+      <select class="filtro-preco" id="filtroPreco">
+        <option value="0">Preço</option>
+        <option value="50">Até R$50</option>
+        <option value="100">Até R$100</option>
+        <option value="200">Até R$200</option>
+      </select>
+      <button class="filtro-fav-btn" id="filtroFav" title="Ver favoritos">
+        <i class="fas fa-heart"></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- GRID DE PRODUTOS -->
   <main class="grid" id="grid"></main>
- 
+
+  <!-- RODAPÉ CARRINHO -->
   <div class="carrinho-bar" id="carrinhoBar">
     <div class="carrinho-info">
       <span id="carrinhoCount">0 itens</span>
@@ -33,12 +63,19 @@
     </div>
     <button class="btn-pedido" id="btnPedido">Ver pedido →</button>
   </div>
- 
-  
+
+  <!-- MODAL PEDIDO -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
       <button class="modal-fechar" id="modalFechar">✕</button>
-      <h2 class="modal-titulo">Seu Pedido</h2>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
+        <h2 class="modal-titulo" style="margin:0;">Seu Pedido</h2>
+        <button id="btnLimpar" style="background:none;border:1px solid #E8D6CE;color:#8A8A8A;font-size:12px;padding:5px 12px;border-radius:20px;cursor:pointer;">Limpar tudo</button>
+      </div>
+      <!-- CAMPO NOME -->
+      <div style="margin-bottom:14px;">
+        <input id="nomeCliente" type="text" placeholder="Seu nome (opcional)" style="width:100%;border:1px solid #E8D6CE;border-radius:8px;padding:10px 12px;font-family:'Inter',sans-serif;font-size:13px;color:#2D2D2D;background:#FDFAF9;outline:none;" />
+      </div>
       <div id="modalItens"></div>
       <div class="modal-total">
         <span>Total</span>
@@ -52,8 +89,8 @@
       </div>
     </div>
   </div>
- 
- 
+
+  <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox">
     <button class="lightbox-fechar" id="lightboxFechar">✕</button>
     <img class="lightbox-img" id="lightboxImg" src="" alt="" />
@@ -63,7 +100,12 @@
     </div>
     <button class="lightbox-whats" id="lightboxWhats"><i class="fab fa-whatsapp"></i> Pedir pelo WhatsApp</button>
   </div>
- 
+
+  <!-- BOTÃO DARK MODE -->
+  <button class="dark-toggle" id="darkToggle" title="Alternar modo escuro">
+    <i class="fas fa-moon"></i>
+  </button>
+
   <script src="js/catalogo.js"></script>
 </body>
 </html>
