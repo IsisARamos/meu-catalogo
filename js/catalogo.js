@@ -1,4 +1,3 @@
-
 const WHATSAPP = "5551986489731";
 const NOME_LOJA = "Use Isis";
 const MAX_ITENS = 10;
@@ -31,27 +30,28 @@ async function init() {
 function initBanner() {
   const slides = [
     {
-      eyebrow: "sono & bem-estar",
-      titulo: "Um bom pijama transforma sua noite.",
-      texto: "Tecidos macios e confortáveis regulam a temperatura do corpo, ajudam a relaxar e melhoram a qualidade do sono. Você merece dormir bem.",
+      eyebrow: "✨ sono & bem-estar",
+      titulo: "Um bom pijama é o primeiro passo para uma noite perfeita.",
+      texto: "Dormir bem começa com o que você veste. Tecidos macios e confortáveis regulam a temperatura, relaxam o corpo e transformam o sono em um momento de puro prazer. Você merece acordar renovada.",
       bg: "linear-gradient(135deg,#2a1a1a,#3d2020)"
     },
     {
-      eyebrow: "perfumaria & autoestima",
-      titulo: "Um bom perfume é presença antes mesmo das palavras.",
-      texto: "Fragrâncias impactam o humor, a confiança e como somos lembradas. Usar um perfume que você ama é um ato de cuidado consigo mesma.",
-      bg: "linear-gradient(135deg,#1a1a2a,#20203d)"
+      eyebrow: "🌸 lingerie & autoestima",
+      titulo: "Vestir uma boa lingerie é um presente que você dá a si mesma.",
+      texto: "Não é só o que os outros veem — é o que você sente. Uma lingerie bonita eleva a autoestima, desperta a sensualidade e celebra seu corpo com o carinho que ele merece. Porque você vale esse cuidado.",
+      bg: "linear-gradient(135deg,#2a1a22,#3d2030)"
     },
     {
-      eyebrow: "lingerie & confiança",
-      titulo: "Vestir uma boa lingerie é se sentir poderosa por dentro.",
-      texto: "Não é só para os outros — é para você. Uma lingerie bonita eleva a autoestima, desperta sensualidade e celebra seu corpo do jeito que ele merece.",
-      bg: "linear-gradient(135deg,#2a1a22,#3d2030)"
+      eyebrow: "💫 perfumaria & presença",
+      titulo: "Um bom perfume é memória, é presença, é identidade.",
+      texto: "Fragrâncias têm o poder de transformar o humor, aumentar a confiança e marcar para sempre quem cruzou nosso caminho. Escolher um perfume que combina com você é um ato de amor próprio.",
+      bg: "linear-gradient(135deg,#1a1a2a,#20203d)"
     }
   ];
 
   const track = document.getElementById("bannerTrack");
   const dots = document.getElementById("bannerDots");
+  const total = slides.length;
 
   track.innerHTML = slides.map(s => `
     <div class="banner-slide" style="background:${s.bg};">
@@ -65,18 +65,27 @@ function initBanner() {
   ).join("");
 
   document.getElementById("bannerPrev").addEventListener("click", () => {
-    irParaSlide((bannerAtual - 1 + slides.length) % slides.length);
+    irParaSlide((bannerAtual - 1 + total) % total);
   });
   document.getElementById("bannerNext").addEventListener("click", () => {
-    irParaSlide((bannerAtual + 1) % slides.length);
+    irParaSlide((bannerAtual + 1) % total);
   });
 
   bannerTimer = setInterval(() => {
-    irParaSlide((bannerAtual + 1) % slides.length);
-  }, 4000);
+    irParaSlide((bannerAtual + 1) % total);
+  }, 4500);
+
+  // Equaliza altura dos slides após render
+  setTimeout(() => {
+    const allSlides = track.querySelectorAll(".banner-slide");
+    let maxH = 0;
+    allSlides.forEach(s => { if (s.offsetHeight > maxH) maxH = s.offsetHeight; });
+    allSlides.forEach(s => { s.style.minHeight = maxH + "px"; });
+  }, 200);
 }
 
 function irParaSlide(idx) {
+  const total = document.querySelectorAll(".banner-slide").length;
   bannerAtual = idx;
   document.getElementById("bannerTrack").style.transform = `translateX(-${idx * 100}%)`;
   document.querySelectorAll(".banner-dot").forEach((d, i) => {
@@ -84,8 +93,8 @@ function irParaSlide(idx) {
   });
   clearInterval(bannerTimer);
   bannerTimer = setInterval(() => {
-    irParaSlide((bannerAtual + 1) % 3);
-  }, 4000);
+    irParaSlide((bannerAtual + 1) % total);
+  }, 4500);
 }
 
 // ===================== DARK MODE =====================
