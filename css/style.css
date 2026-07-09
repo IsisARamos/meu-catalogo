@@ -43,43 +43,47 @@ body {
 }
 .banner-track {
   display: flex;
-  align-items: flex-start;
   transition: transform .5s ease;
 }
 .banner-slide {
   min-width: 100%;
   flex-shrink: 0;
   box-sizing: border-box;
-  padding: 40px 24px 52px;
+  padding: 40px 32px 52px;
   text-align: center;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 .banner-eyebrow {
-  font-size: 10px;
-  letter-spacing: 4px;
+  font-size: 11px;
+  letter-spacing: 3px;
   color: #D4A96A;
   text-transform: uppercase;
-  margin: 0 0 12px;
+  margin: 0 0 14px;
   font-family: 'Inter', sans-serif;
 }
 .banner-titulo {
   font-family: 'Playfair Display', serif;
-  font-size: 18px;
+  font-size: clamp(15px, 3vw, 20px);
   color: #F5E6E0;
-  margin: 0 0 12px;
-  line-height: 1.4;
+  margin: 0 0 14px;
+  line-height: 1.5;
 }
 .banner-texto {
-  font-size: 13px;
-  color: #aaa;
+  font-size: clamp(12px, 2vw, 14px);
+  color: #bbb;
   margin: 0;
-  line-height: 1.7;
+  line-height: 1.8;
   font-family: 'Inter', sans-serif;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .banner-nav {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background: rgba(0,0,0,.4);
+  background: rgba(0,0,0,.5);
   color: white;
   border: none;
   width: 28px;
@@ -93,12 +97,12 @@ body {
   justify-content: center;
   transition: background .2s;
 }
-.banner-nav:hover { background: rgba(0,0,0,.7); }
+.banner-nav:hover { background: rgba(0,0,0,.8); }
 .banner-nav.prev { left: 6px; }
 .banner-nav.next { right: 6px; }
 .banner-dots {
   position: absolute;
-  bottom: 10px;
+  bottom: 12px;
   left: 0; right: 0;
   display: flex;
   justify-content: center;
@@ -107,9 +111,10 @@ body {
 .banner-dot {
   width: 6px; height: 6px;
   border-radius: 50%;
-  background: rgba(255,255,255,.4);
+  background: rgba(255,255,255,.3);
   cursor: pointer;
   border: none;
+  padding: 0;
   transition: background .2s;
 }
 .banner-dot.ativo { background: var(--dourado); }
