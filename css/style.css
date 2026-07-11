@@ -38,7 +38,7 @@ body {
 /* ===== BANNER ROTATIVO ===== */
 .banner-slider {
   position: relative;
-  background: #111;
+  background: #2D2D2D;
   overflow: hidden;
 }
 .banner-track {
