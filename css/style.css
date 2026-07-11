@@ -12,17 +12,19 @@
   --bg:         #FDFAF9;
   --card-bg:    white;
   --text:       #2D2D2D;
+  --banner-bg:  #C8A882;
 }
 
 body.dark {
-  --creme:   #1a1a1a;
-  --bg:      #1a1a1a;
-  --card-bg: #2a2a2a;
-  --text:    #F5E6E0;
-  --borda:   #3a3a3a;
-  --cinza:   #aaa;
-  --grafite: #1a1a1a;
-  --nude:    #2a2a2a;
+  --creme:      #1a1a1a;
+  --bg:         #1a1a1a;
+  --card-bg:    #2a2a2a;
+  --text:       #F5E6E0;
+  --borda:      #3a3a3a;
+  --cinza:      #aaa;
+  --grafite:    #1a1a1a;
+  --nude:       #2a2a2a;
+  --banner-bg:  #1a1a1a;
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -38,8 +40,9 @@ body {
 /* ===== BANNER ROTATIVO ===== */
 .banner-slider {
   position: relative;
-  background: #2D2D2D;
+  background: var(--banner-bg);
   overflow: hidden;
+  transition: background .3s;
 }
 .banner-track {
   display: flex;
@@ -72,12 +75,10 @@ body {
 .banner-texto {
   font-size: clamp(12px, 2vw, 14px);
   color: #bbb;
-  margin: 0;
+  margin: 0 auto;
   line-height: 1.8;
   font-family: 'Inter', sans-serif;
   max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
 }
 .banner-nav {
   position: absolute;
@@ -86,15 +87,12 @@ body {
   background: rgba(0,0,0,.5);
   color: white;
   border: none;
-  width: 28px;
-  height: 28px;
+  width: 28px; height: 28px;
   border-radius: 50%;
   font-size: 18px;
   cursor: pointer;
   z-index: 10;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   transition: background .2s;
 }
 .banner-nav:hover { background: rgba(0,0,0,.8); }
@@ -102,11 +100,8 @@ body {
 .banner-nav.next { right: 6px; }
 .banner-dots {
   position: absolute;
-  bottom: 12px;
-  left: 0; right: 0;
-  display: flex;
-  justify-content: center;
-  gap: 6px;
+  bottom: 12px; left: 0; right: 0;
+  display: flex; justify-content: center; gap: 6px;
 }
 .banner-dot {
   width: 6px; height: 6px;
@@ -550,7 +545,3 @@ body {
   transition: background .2s;
 }
 .dark-toggle:hover { background: rgba(0,0,0,.7); }
-
-body:not(.dark) .banner-slider {
-  background: #F5E6E0;
-}
