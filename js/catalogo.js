@@ -52,10 +52,10 @@ function initBanner() {
   const total = slides.length;
 
   track.innerHTML = slides.map(s => `
-    <div class="banner-slide" style="position:relative;min-width:100%;overflow:hidden;">
-      <img src="${s.imagem}" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;min-height:220px;max-height:320px;" />
-      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(20,8,8,0.1),rgba(20,8,8,0.85));"></div>
-      <div style="position:absolute;bottom:0;left:0;right:0;padding:16px 24px 32px;text-align:center;">
+    <div style="position:relative;min-width:100%;height:280px;overflow:hidden;flex-shrink:0;">
+      <img src="${s.imagem}" style="position:absolute;top:0;left:50%;transform:translateX(-50%);height:100%;width:auto;min-width:100%;object-fit:cover;object-position:top center;" />
+      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,5,5,0.05) 30%,rgba(10,5,5,0.85));"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:16px 24px 36px;text-align:center;">
         <p style="font-size:10px;letter-spacing:3px;color:#D4A96A;text-transform:uppercase;margin:0 0 8px;font-family:'Inter',sans-serif;">${s.eyebrow}</p>
         <p style="font-family:'Playfair Display',serif;font-size:clamp(14px,3.5vw,18px);color:#F5E6E0;margin:0;line-height:1.5;font-style:italic;">"${s.frase}"</p>
       </div>
@@ -78,7 +78,7 @@ function initBanner() {
 }
 
 function irParaSlide(idx) {
-  const total = document.querySelectorAll(".banner-slide").length;
+  const total = document.querySelectorAll("#bannerTrack > div").length;
   bannerAtual = idx;
   document.getElementById("bannerTrack").style.transform = `translateX(-${idx * 100}%)`;
   document.querySelectorAll(".banner-dot").forEach((d, i) => {
