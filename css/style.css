@@ -550,3 +550,7 @@ body {
   transition: background .2s;
 }
 .dark-toggle:hover { background: rgba(0,0,0,.7); }
+
+body:not(.dark) .banner-slider {
+  background: #F5E6E0;
+}
