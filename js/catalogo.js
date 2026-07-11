@@ -1,3 +1,4 @@
+
 const WHATSAPP = "5551986489731";
 const NOME_LOJA = "Use Isis";
 const MAX_ITENS = 10;
@@ -26,26 +27,23 @@ async function init() {
   }
 }
 
-// ===================== BANNER INFORMATIVO =====================
+// ===================== BANNER =====================
 function initBanner() {
   const slides = [
     {
-      eyebrow: "✨ sono & bem-estar",
-      titulo: "Um bom pijama é o primeiro passo para uma noite perfeita.",
-      texto: "Dormir bem começa com o que você veste. Tecidos macios e confortáveis regulam a temperatura, relaxam o corpo e transformam o sono em um momento de puro prazer. Você merece acordar renovada.",
-      bg: "linear-gradient(135deg,#2a1a1a,#3d2020)"
+      eyebrow: "sono & bem-estar",
+      frase: "Um bom pijama é o começo de uma noite perfeita.",
+      imagem: "https://i.imgur.com/ALAGCH4.jpeg"
     },
     {
-      eyebrow: "🌸 lingerie & autoestima",
-      titulo: "Vestir uma boa lingerie é um presente que você dá a si mesma.",
-      texto: "Não é só o que os outros veem — é o que você sente. Uma lingerie bonita eleva a autoestima, desperta a sensualidade e celebra seu corpo com o carinho que ele merece. Porque você vale esse cuidado.",
-      bg: "linear-gradient(135deg,#2a1a22,#3d2030)"
+      eyebrow: "lingerie & confiança",
+      frase: "Me visto bem por dentro antes mesmo de sair de casa.",
+      imagem: "https://i.imgur.com/WyMAXZY.jpeg"
     },
     {
-      eyebrow: "💫 perfumaria & presença",
-      titulo: "Um bom perfume é memória, é presença, é identidade.",
-      texto: "Fragrâncias têm o poder de transformar o humor, aumentar a confiança e marcar para sempre quem cruzou nosso caminho. Escolher um perfume que combina com você é um ato de amor próprio.",
-      bg: "linear-gradient(135deg,#1a1a2a,#20203d)"
+      eyebrow: "perfumaria & presença",
+      frase: "Um perfume bom chega antes de você e fica depois que vai embora.",
+      imagem: "https://i.imgur.com/ALAGCH4.jpeg"
     }
   ];
 
@@ -54,10 +52,13 @@ function initBanner() {
   const total = slides.length;
 
   track.innerHTML = slides.map(s => `
-    <div class="banner-slide" style="background:${s.bg};">
-      <p class="banner-eyebrow">${s.eyebrow}</p>
-      <p class="banner-titulo">${s.titulo}</p>
-      <p class="banner-texto">${s.texto}</p>
+    <div class="banner-slide" style="position:relative;min-width:100%;overflow:hidden;">
+      <img src="${s.imagem}" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;min-height:220px;max-height:320px;" />
+      <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(20,8,8,0.1),rgba(20,8,8,0.85));"></div>
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:16px 24px 32px;text-align:center;">
+        <p style="font-size:10px;letter-spacing:3px;color:#D4A96A;text-transform:uppercase;margin:0 0 8px;font-family:'Inter',sans-serif;">${s.eyebrow}</p>
+        <p style="font-family:'Playfair Display',serif;font-size:clamp(14px,3.5vw,18px);color:#F5E6E0;margin:0;line-height:1.5;font-style:italic;">"${s.frase}"</p>
+      </div>
     </div>`).join("");
 
   dots.innerHTML = slides.map((_, i) =>
@@ -74,14 +75,6 @@ function initBanner() {
   bannerTimer = setInterval(() => {
     irParaSlide((bannerAtual + 1) % total);
   }, 4500);
-
-  // Equaliza altura dos slides após render
-  setTimeout(() => {
-    const allSlides = track.querySelectorAll(".banner-slide");
-    let maxH = 0;
-    allSlides.forEach(s => { if (s.offsetHeight > maxH) maxH = s.offsetHeight; });
-    allSlides.forEach(s => { s.style.minHeight = maxH + "px"; });
-  }, 200);
 }
 
 function irParaSlide(idx) {
