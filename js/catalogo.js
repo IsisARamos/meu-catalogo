@@ -1,4 +1,3 @@
-
 const WHATSAPP = "5551986489731";
 const NOME_LOJA = "Use Isis";
 const MAX_ITENS = 10;
@@ -33,17 +32,17 @@ function initBanner() {
     {
       eyebrow: "sono & bem-estar",
       frase: "Um bom pijama é o começo de uma noite perfeita.",
-      imagem: "https://drive.google.com/uc?export=view&id=1Nrf2V54_5xIb1d66ol0ko3W7yrzHjfYp"
+      imagem: "https://i.imgur.com/ALAGCH4.jpeg"
     },
     {
       eyebrow: "lingerie & confiança",
       frase: "Me visto bem por dentro antes mesmo de sair de casa.",
-      imagem: "https://drive.google.com/uc?export=view&id=1Rn_D9wtL5J3SxgBAzIgAgqUzstQxhGTZ"
+      imagem: "https://i.imgur.com/WyMAXZY.jpeg"
     },
     {
       eyebrow: "perfumaria & presença",
       frase: "Um perfume bom chega antes de você e fica depois que vai embora.",
-      imagem: "https://drive.google.com/uc?export=view&id=1Nrf2V54_5xIb1d66ol0ko3W7yrzHjfYp"
+      imagem: "https://i.imgur.com/ALAGCH4.jpeg"
     }
   ];
 
