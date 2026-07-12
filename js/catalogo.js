@@ -1,3 +1,4 @@
+
 const WHATSAPP = "5551986489731";
 const NOME_LOJA = "Use Isis";
 const MAX_ITENS = 10;
@@ -26,7 +27,6 @@ async function init() {
   }
 }
 
-// ===================== BANNER =====================
 function initBanner() {
   const slides = [
     {
@@ -89,7 +89,6 @@ function irParaSlide(idx) {
   }, 4500);
 }
 
-// ===================== DARK MODE =====================
 function aplicarCoresHeader(isDark) {
   const header = document.getElementById("siteHeader");
   if (!header) return;
@@ -114,7 +113,6 @@ function initDarkMode() {
   });
 }
 
-// ===================== FILTROS =====================
 function renderFiltros() {
   const cats = ["Todos", ...new Set(produtos.map(p => p.categoria))];
   const nav = document.getElementById("filtros");
@@ -142,7 +140,6 @@ function renderFiltros() {
   });
 }
 
-// ===================== GRID =====================
 function renderGrid() {
   let lista = filtroAtivo === "Todos"
     ? produtos
@@ -221,7 +218,6 @@ function renderGrid() {
   });
 }
 
-// ===================== CARRINHO =====================
 function toggleCarrinho(id) {
   const idx = carrinho.indexOf(id);
   if (idx === -1) carrinho.push(id);
@@ -248,7 +244,6 @@ function atualizarBarra() {
     itens.length === 0 ? "Nenhum item selecionado" : `${itens.length} ${itens.length === 1 ? "item" : "itens"} no carrinho`;
 }
 
-// ===================== LIGHTBOX =====================
 function abrirLightbox(id) {
   const p = produtos.find(x => x.id === id);
   if (!p) return;
@@ -274,7 +269,6 @@ document.getElementById("lightbox").addEventListener("click", e => {
   if (e.target === e.currentTarget) fecharLightbox();
 });
 
-// ===================== MODAL =====================
 document.getElementById("btnPedido").addEventListener("click", abrirModal);
 document.getElementById("modalFechar").addEventListener("click", fecharModal);
 document.getElementById("modalOverlay").addEventListener("click", e => {
