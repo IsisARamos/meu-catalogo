@@ -33,17 +33,17 @@ function initBanner() {
     {
       eyebrow: "sono & bem-estar",
       frase: "Um bom pijama é o começo de uma noite perfeita.",
-      imagem: "https://i.imgur.com/ALAGCH4.jpeg"
+      imagem: "https://drive.google.com/uc?export=view&id=1Nrf2V54_5xIb1d66ol0ko3W7yrzHjfYp"
     },
     {
       eyebrow: "lingerie & confiança",
       frase: "Me visto bem por dentro antes mesmo de sair de casa.",
-      imagem: "https://i.imgur.com/WyMAXZY.jpeg"
+      imagem: "https://drive.google.com/uc?export=view&id=1Rn_D9wtL5J3SxgBAzIgAgqUzstQxhGTZ"
     },
     {
       eyebrow: "perfumaria & presença",
       frase: "Um perfume bom chega antes de você e fica depois que vai embora.",
-      imagem: "https://i.imgur.com/ALAGCH4.jpeg"
+      imagem: "https://drive.google.com/uc?export=view&id=1Nrf2V54_5xIb1d66ol0ko3W7yrzHjfYp"
     }
   ];
 
