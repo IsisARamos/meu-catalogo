@@ -52,8 +52,8 @@ function initBanner() {
   const total = slides.length;
 
   track.innerHTML = slides.map(s => `
-    <div style="position:relative;min-width:100%;height:280px;overflow:hidden;flex-shrink:0;">
-      <img src="${s.imagem}" style="position:absolute;top:0;left:50%;transform:translateX(-50%);height:100%;width:auto;min-width:100%;object-fit:cover;object-position:top center;" />
+    <div style="position:relative;min-width:100%;height:380px;overflow:hidden;flex-shrink:0;">
+      <img src="${s.imagem}" style="position:absolute;top:0;left:50%;transform:translateX(-50%);height:100%;width:auto;min-width:100%;object-fit:cover;object-position:center center;" />
       <div style="position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,5,5,0.05) 30%,rgba(10,5,5,0.85));"></div>
       <div style="position:absolute;bottom:0;left:0;right:0;padding:16px 24px 36px;text-align:center;">
         <p style="font-size:10px;letter-spacing:3px;color:#D4A96A;text-transform:uppercase;margin:0 0 8px;font-family:'Inter',sans-serif;">${s.eyebrow}</p>
