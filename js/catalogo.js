@@ -15,6 +15,7 @@ async function init() {
   try {
     const res = await fetch("produtos.json");
     produtos = await res.json();
+    lerFiltrosDaURL();
     renderFiltros();
     renderGrid();
     atualizarBarra();
@@ -24,6 +25,22 @@ async function init() {
     document.getElementById("grid").innerHTML =
       '<p style="padding:20px;color:#888">Erro ao carregar produtos.</p>';
   }
+}
+
+function lerFiltrosDaURL() {
+  const params = new URLSearchParams(location.search);
+  if (params.has("cat")) filtroAtivo = params.get("cat");
+  if (params.has("preco")) filtroPrecoDe = Number(params.get("preco")) || 0;
+  if (params.get("fav") === "1") mostrarFavoritos = true;
+}
+
+function syncURL() {
+  const params = new URLSearchParams();
+  if (filtroAtivo !== "Todos") params.set("cat", filtroAtivo);
+  if (filtroPrecoDe > 0) params.set("preco", String(filtroPrecoDe));
+  if (mostrarFavoritos) params.set("fav", "1");
+  const query = params.toString();
+  history.replaceState(null, "", query ? `${location.pathname}?${query}` : location.pathname);
 }
 
 function initBanner() {
@@ -98,7 +115,10 @@ function aplicarCoresHeader(isDark) {
 }
 
 function initDarkMode() {
-  const dark = localStorage.getItem("darkMode") === "1";
+  const salvo = localStorage.getItem("darkMode");
+  const dark = salvo !== null
+    ? salvo === "1"
+    : window.matchMedia("(prefers-color-scheme: dark)").matches;
   if (dark) document.body.classList.add("dark");
   aplicarCoresHeader(dark);
 
@@ -124,20 +144,28 @@ function renderFiltros() {
       nav.querySelectorAll(".filtro-btn").forEach(b => b.classList.remove("ativo"));
       btn.classList.add("ativo");
       renderGrid();
+      syncURL();
     });
   });
 
-  document.getElementById("filtroPreco").addEventListener("change", e => {
+  const filtroPrecoEl = document.getElementById("filtroPreco");
+  filtroPrecoEl.value = String(filtroPrecoDe);
+  filtroPrecoEl.addEventListener("change", e => {
     filtroPrecoDe = Number(e.target.value);
     renderGrid();
+    syncURL();
   });
 
+  document.getElementById("filtroFav").classList.toggle("ativo", mostrarFavoritos);
   document.getElementById("filtroFav").addEventListener("click", () => {
     mostrarFavoritos = !mostrarFavoritos;
     document.getElementById("filtroFav").classList.toggle("ativo", mostrarFavoritos);
     renderGrid();
+    syncURL();
   });
 }
+
+const supportsViewTransition = "startViewTransition" in document;
 
 function renderGrid() {
   let lista = filtroAtivo === "Todos"
@@ -147,14 +175,25 @@ function renderGrid() {
   if (filtroPrecoDe > 0) lista = lista.filter(p => p.preco <= filtroPrecoDe);
   if (mostrarFavoritos) lista = lista.filter(p => favoritos.includes(p.id));
 
+  if (supportsViewTransition) document.startViewTransition(() => desenharGrid(lista));
+  else desenharGrid(lista);
+}
+
+function desenharGrid(lista) {
   const grid = document.getElementById("grid");
+
+  if (lista.length === 0) {
+    grid.innerHTML = '<p class="grid-vazio">Nenhum produto encontrado com esse filtro.</p>';
+    return;
+  }
+
   grid.innerHTML = lista.map(p => {
     const sel = carrinho.includes(p.id);
     const esg = !p.disponivel;
     const fav = favoritos.includes(p.id);
     return `
       <div class="card${esg ? " esgotado" : ""}${sel ? " selecionado" : ""}" data-id="${p.id}">
-        <button class="card-fav${fav ? " favoritado" : ""}" data-id="${p.id}" title="Favoritar">
+        <button class="card-fav${fav ? " favoritado" : ""}" data-id="${p.id}" title="Favoritar" aria-label="Favoritar ${p.nome}">
           <i class="${fav ? "fas" : "far"} fa-heart"></i>
         </button>
         <img class="card-img" src="${p.imagem}" alt="${p.nome}" loading="lazy" data-lightbox="${p.id}" />
@@ -219,11 +258,29 @@ function renderGrid() {
 
 function toggleCarrinho(id) {
   const idx = carrinho.indexOf(id);
-  if (idx === -1) carrinho.push(id);
+  const adicionando = idx === -1;
+  if (adicionando) carrinho.push(id);
   else carrinho.splice(idx, 1);
   renderGrid();
   atualizarBarra();
   localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  const p = produtos.find(x => x.id === id);
+  if (p) mostrarToast(adicionando ? `${p.nome} adicionado ✓` : `${p.nome} removido`);
+}
+
+let toastTimer = null;
+function mostrarToast(msg) {
+  let toast = document.getElementById("toast");
+  if (!toast) {
+    toast = document.createElement("div");
+    toast.id = "toast";
+    toast.className = "toast";
+    document.body.appendChild(toast);
+  }
+  toast.textContent = msg;
+  toast.classList.add("visivel");
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => toast.classList.remove("visivel"), 2000);
 }
 
 function atualizarBarra() {
