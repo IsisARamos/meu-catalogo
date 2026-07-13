@@ -2,8 +2,22 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <title>Catálogo — Use Isis</title>
+  <meta name="description" content="Catálogo de moda feminina — selecione os itens e envie seu pedido pelo WhatsApp" />
+
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#F5E6E0" />
+  <link rel="icon" href="icons/icon-192.png" type="image/png" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Use Isis — Moda Feminina" />
+  <meta property="og:description" content="Catálogo de moda feminina — selecione os itens e envie seu pedido pelo WhatsApp" />
+  <meta property="og:image" content="https://isisaramos.github.io/meu-catalogo/og-image.png" />
+  <meta property="og:url" content="https://isisaramos.github.io/meu-catalogo/" />
+  <meta name="twitter:card" content="summary_large_image" />
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
@@ -12,18 +26,18 @@
 <body>
 
 <header id="siteHeader" style="background:#F5E6E0;padding:48px 20px 40px;text-align:center;width:100%;transition:background .3s;">
-  <p style="font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:#8B5E3C;letter-spacing:10px;margin:0 0 4px;text-transform:uppercase;">use</p>
-<p style="font-family:'Playfair Display',serif;font-size:72px;font-weight:400;color:#8B5E3C;letter-spacing:12px;margin:0;line-height:1;">ISIS</p>
+  <p class="header-texto" style="font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:#8B5E3C;letter-spacing:10px;margin:0 0 4px;text-transform:uppercase;">use</p>
+<p class="header-texto" style="font-family:'Playfair Display',serif;font-size:72px;font-weight:400;color:#8B5E3C;letter-spacing:12px;margin:0;line-height:1;">ISIS</p>
 <div style="width:60px;height:1px;background:#D4A96A;margin:14px auto;"></div>
-<p style="font-size:18px;letter-spacing:4px;color:#8B5E3C;margin:0 0 16px;text-transform:uppercase;font-family:'Playfair Display',serif;">moda feminina</p>
+<p class="header-texto" style="font-size:18px;letter-spacing:4px;color:#8B5E3C;margin:0 0 16px;text-transform:uppercase;font-family:'Playfair Display',serif;">moda feminina</p>
 <p style="font-size:13px;color:#8A8A8A;margin:0;font-family:'Inter',sans-serif;">Selecione os itens e envie seu pedido pelo WhatsApp <i class="fab fa-whatsapp" style="color:#25D366;"></i></p>
 </header>
 
   <!-- BANNER ROTATIVO -->
   <div class="banner-slider">
     <div class="banner-track" id="bannerTrack"></div>
-    <button class="banner-nav prev" id="bannerPrev">&#8249;</button>
-    <button class="banner-nav next" id="bannerNext">&#8250;</button>
+    <button class="banner-nav prev" id="bannerPrev" title="Slide anterior" aria-label="Slide anterior">&#8249;</button>
+    <button class="banner-nav next" id="bannerNext" title="Próximo slide" aria-label="Próximo slide">&#8250;</button>
     <div class="banner-dots" id="bannerDots"></div>
   </div>
 
@@ -45,7 +59,7 @@
         <option value="100">Até R$100</option>
         <option value="200">Até R$200</option>
       </select>
-      <button class="filtro-fav-btn" id="filtroFav" title="Ver favoritos">
+      <button class="filtro-fav-btn" id="filtroFav" title="Ver favoritos" aria-label="Ver favoritos">
         <i class="fas fa-heart"></i>
       </button>
     </div>
@@ -66,7 +80,7 @@
   <!-- MODAL PEDIDO -->
   <div class="modal-overlay" id="modalOverlay">
     <div class="modal">
-      <button class="modal-fechar" id="modalFechar">✕</button>
+      <button class="modal-fechar" id="modalFechar" title="Fechar" aria-label="Fechar">✕</button>
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
         <h2 class="modal-titulo" style="margin:0;">Seu Pedido</h2>
         <button id="btnLimpar" style="background:none;border:1px solid #E8D6CE;color:#8A8A8A;font-size:12px;padding:5px 12px;border-radius:20px;cursor:pointer;">Limpar tudo</button>
@@ -91,7 +105,7 @@
 
   <!-- LIGHTBOX -->
   <div class="lightbox" id="lightbox">
-    <button class="lightbox-fechar" id="lightboxFechar">✕</button>
+    <button class="lightbox-fechar" id="lightboxFechar" title="Fechar" aria-label="Fechar">✕</button>
     <img class="lightbox-img" id="lightboxImg" src="" alt="" />
     <div class="lightbox-info">
       <p class="lightbox-nome" id="lightboxNome"></p>
@@ -101,7 +115,7 @@
   </div>
 
   <!-- BOTÃO DARK MODE -->
-  <button class="dark-toggle" id="darkToggle" title="Alternar modo escuro">
+  <button class="dark-toggle" id="darkToggle" title="Alternar modo escuro" aria-label="Alternar modo escuro">
     <i class="fas fa-moon"></i>
   </button>
 
