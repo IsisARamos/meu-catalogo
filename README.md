@@ -11,7 +11,8 @@ catalogo/
 ├── index.html        ← página do catálogo (não editar)
 ├── produtos.json     ← 👈 EDITE AQUI para gerenciar produtos
 ├── css/style.css     ← estilos (não editar)
-└── js/catalogo.js    ← lógica (só editar o número de WhatsApp)
+├── js/catalogo.js    ← lógica (só editar o número de WhatsApp)
+└── (+ arquivos do painel administrativo — não editar, ver seção abaixo)
 ```
 
 ---
@@ -49,6 +50,14 @@ Cada produto tem este formato:
 - Use Google Fotos, Imgur, ou qualquer serviço de hospedagem de imagens
 - Copie o link direto da imagem (termina em `.jpg`, `.png`, `.webp`)
 - Fotos com proporção **4:5** (retrato) ficam mais bonitas
+
+---
+
+## 🛠️ Painel administrativo (opcional)
+
+Além de editar `produtos.json` manualmente, existe um painel com formulário para cadastrar, editar e excluir produtos — incluindo enviar foto direto do computador/celular, sem precisar hospedar a imagem em outro site.
+
+O link do painel é **privado** e foi passado a você separadamente (não está neste arquivo). Não compartilhe esse link — ele é a única proteção de acesso ao painel, então trate-o como uma senha.
 
 ---
 
