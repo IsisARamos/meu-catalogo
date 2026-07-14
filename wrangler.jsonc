@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "meu-catalogo",
+  "compatibility_date": "2026-07-14",
+  "main": "src/worker.js",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": ".",
+    "run_worker_first": ["/api/*"]
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ]
+}
