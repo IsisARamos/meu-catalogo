@@ -10,6 +10,8 @@ let filtroPrecoDe = 0;
 let mostrarFavoritos = false;
 let bannerAtual = 0;
 let bannerTimer = null;
+let listaAtual = [];
+let lightboxIndex = -1;
 
 async function init() {
   try {
@@ -41,6 +43,26 @@ function syncURL() {
   if (mostrarFavoritos) params.set("fav", "1");
   const query = params.toString();
   history.replaceState(null, "", query ? `${location.pathname}?${query}` : location.pathname);
+}
+
+function attachSwipe(el, { onLeft, onRight, threshold = 40 } = {}) {
+  let startX = 0, startY = 0, tracking = false;
+  el.addEventListener("touchstart", e => {
+    const t = e.touches[0];
+    startX = t.clientX;
+    startY = t.clientY;
+    tracking = true;
+  }, { passive: true });
+  el.addEventListener("touchend", e => {
+    if (!tracking) return;
+    tracking = false;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - startX;
+    const dy = t.clientY - startY;
+    if (Math.abs(dx) < threshold || Math.abs(dx) < Math.abs(dy)) return;
+    if (dx < 0) onLeft && onLeft();
+    else onRight && onRight();
+  }, { passive: true });
 }
 
 function initBanner() {
@@ -85,6 +107,11 @@ function initBanner() {
   });
   document.getElementById("bannerNext").addEventListener("click", () => {
     irParaSlide((bannerAtual + 1) % total);
+  });
+
+  attachSwipe(track, {
+    onLeft: () => irParaSlide((bannerAtual + 1) % total),
+    onRight: () => irParaSlide((bannerAtual - 1 + total) % total),
   });
 
   bannerTimer = setInterval(() => {
@@ -180,6 +207,7 @@ function renderGrid() {
 }
 
 function desenharGrid(lista) {
+  listaAtual = lista;
   const grid = document.getElementById("grid");
 
   if (lista.length === 0) {
@@ -301,7 +329,16 @@ function atualizarBarra() {
 }
 
 function abrirLightbox(id) {
-  const p = produtos.find(x => x.id === id);
+  const idx = listaAtual.findIndex(p => p.id === id);
+  if (idx === -1) return;
+  lightboxIndex = idx;
+  mostrarProdutoNoLightbox();
+  document.getElementById("lightbox").classList.add("aberto");
+  document.body.style.overflow = "hidden";
+}
+
+function mostrarProdutoNoLightbox() {
+  const p = listaAtual[lightboxIndex];
   if (!p) return;
   document.getElementById("lightboxImg").src = p.imagem;
   document.getElementById("lightboxImg").alt = p.nome;
@@ -311,8 +348,12 @@ function abrirLightbox(id) {
     const msg = `Olá! Tenho interesse no produto: *${p.nome}* — ${formatBRL(p.preco)} 😊`;
     window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
   };
-  document.getElementById("lightbox").classList.add("aberto");
-  document.body.style.overflow = "hidden";
+}
+
+function navegarLightbox(delta) {
+  if (listaAtual.length === 0) return;
+  lightboxIndex = (lightboxIndex + delta + listaAtual.length) % listaAtual.length;
+  mostrarProdutoNoLightbox();
 }
 
 function fecharLightbox() {
@@ -323,6 +364,10 @@ function fecharLightbox() {
 document.getElementById("lightboxFechar").addEventListener("click", fecharLightbox);
 document.getElementById("lightbox").addEventListener("click", e => {
   if (e.target === e.currentTarget) fecharLightbox();
+});
+attachSwipe(document.getElementById("lightbox"), {
+  onLeft: () => navegarLightbox(1),
+  onRight: () => navegarLightbox(-1),
 });
 
 document.getElementById("btnPedido").addEventListener("click", abrirModal);
