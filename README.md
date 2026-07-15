@@ -55,9 +55,9 @@ Cada produto tem este formato:
 
 ## 🛠️ Painel administrativo (opcional)
 
-Além de editar `produtos.json` manualmente, existe um painel com formulário para cadastrar, editar e excluir produtos — incluindo enviar foto direto do computador/celular, sem precisar hospedar a imagem em outro site.
+Além de editar `produtos.json` manualmente, existe um painel com formulário para cadastrar, editar e excluir produtos. A foto continua sendo um link (igual ao campo `"imagem"` do JSON) — cole a URL da imagem já hospedada em algum serviço (Google Fotos, Imgur, etc.).
 
-O link do painel é **privado** e foi passado a você separadamente (não está neste arquivo). Não compartilhe esse link — ele é a única proteção de acesso ao painel, então trate-o como uma senha.
+O link do painel é privado e foi passado a você separadamente (não está neste arquivo). O acesso é protegido por login (código enviado ao seu e-mail) — só entra quem estiver na lista de e-mails autorizados.
 
 ---
 

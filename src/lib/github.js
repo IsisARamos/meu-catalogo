@@ -41,15 +41,6 @@ export async function putFile(env, path, contentStr, sha, message) {
   });
 }
 
-export async function putBase64File(env, path, base64Content, message) {
-  const url = `${API}/repos/${env.GH_OWNER}/${env.GH_REPO}/contents/${path}`;
-  return fetch(url, {
-    method: "PUT",
-    headers: { ...ghHeaders(env), "Content-Type": "application/json" },
-    body: JSON.stringify({ message, content: base64Content, branch: env.GH_BRANCH }),
-  });
-}
-
 /**
  * Ciclo leitura-modificação-escrita de produtos.json com retry em caso de
  * conflito de sha (duas edições quase simultâneas).

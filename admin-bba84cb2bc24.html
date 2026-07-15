@@ -71,16 +71,8 @@
         <label for="campoDisponivel">Disponível (em estoque)</label>
       </div>
       <div class="campo">
-        <label for="campoImagemUrl">Imagem — link (opcional se for enviar uma foto abaixo)</label>
-        <input type="text" id="campoImagemUrl" placeholder="https://..." />
-      </div>
-      <div class="campo">
-        <label for="campoImagemArquivo">Ou enviar uma foto</label>
-        <input type="file" id="campoImagemArquivo" accept="image/*" />
-        <div class="campo-imagem-preview" id="previewImagem" style="display:none;">
-          <img id="previewImagemImg" src="" alt="Pré-visualização" />
-          <span id="previewImagemTexto"></span>
-        </div>
+        <label for="campoImagemUrl">Imagem — link</label>
+        <input type="text" id="campoImagemUrl" placeholder="https://..." required />
       </div>
       <div class="form-acoes">
         <button type="button" class="btn btn-secondary" id="cancelarForm">Cancelar</button>

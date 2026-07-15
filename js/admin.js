@@ -5,7 +5,6 @@ const API_BASE = "";
 let produtos = [];
 let editandoId = null;
 let excluindoId = null;
-let arquivoComprimido = null;
 let toastTimer = null;
 
 async function init() {
@@ -27,7 +26,6 @@ function wireEventos() {
     if (e.target === e.currentTarget) fecharConfirm();
   });
 
-  document.getElementById("campoImagemArquivo").addEventListener("change", onArquivoEscolhido);
   document.getElementById("form").addEventListener("submit", onSalvar);
   document.getElementById("confirmarExcluir").addEventListener("click", onExcluir);
 }
@@ -102,9 +100,7 @@ function renderDatalistCategorias() {
 
 function abrirForm(id) {
   editandoId = id;
-  arquivoComprimido = null;
   document.getElementById("form").reset();
-  document.getElementById("previewImagem").style.display = "none";
   document.getElementById("erroForm").innerHTML = "";
 
   if (id !== null) {
@@ -128,123 +124,22 @@ function fecharForm() {
   document.getElementById("modalForm").classList.remove("aberto");
 }
 
-async function onArquivoEscolhido(e) {
-  const file = e.target.files[0];
-  const preview = document.getElementById("previewImagem");
-  const previewImg = document.getElementById("previewImagemImg");
-  const previewTexto = document.getElementById("previewImagemTexto");
-
-  if (!file) {
-    preview.style.display = "none";
-    arquivoComprimido = null;
-    return;
-  }
-
-  previewTexto.textContent = "Comprimindo...";
-  preview.style.display = "flex";
-  try {
-    const resultado = await comprimirImagem(file);
-    arquivoComprimido = { ...resultado, filename: file.name };
-    previewImg.src = `data:${resultado.contentType};base64,${resultado.base64}`;
-    previewTexto.textContent = `${(resultado.sizeBytes / 1024).toFixed(0)} KB`;
-  } catch (err) {
-    preview.style.display = "none";
-    arquivoComprimido = null;
-    mostrarErroForm("Não foi possível processar essa imagem.");
-  }
-}
-
-function carregarImagem(file) {
-  return new Promise((resolve, reject) => {
-    const url = URL.createObjectURL(file);
-    const img = new Image();
-    img.onload = () => {
-      URL.revokeObjectURL(url);
-      resolve(img);
-    };
-    img.onerror = () => {
-      URL.revokeObjectURL(url);
-      reject(new Error("Não foi possível ler a imagem."));
-    };
-    img.src = url;
-  });
-}
-
-function canvasParaBlob(canvas, tipo, qualidade) {
-  return new Promise((resolve) => canvas.toBlob(resolve, tipo, qualidade));
-}
-
-function blobParaBase64(blob) {
-  return new Promise((resolve) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(String(reader.result).split(",")[1]);
-    reader.readAsDataURL(blob);
-  });
-}
-
-async function comprimirImagem(file) {
-  const img = await carregarImagem(file);
-  const MAX = 1200;
-  let { width, height } = img;
-  if (width > MAX || height > MAX) {
-    if (width >= height) {
-      height = Math.round(height * (MAX / width));
-      width = MAX;
-    } else {
-      width = Math.round(width * (MAX / height));
-      height = MAX;
-    }
-  }
-  const canvas = document.createElement("canvas");
-  canvas.width = width;
-  canvas.height = height;
-  canvas.getContext("2d").drawImage(img, 0, 0, width, height);
-
-  let blob = await canvasParaBlob(canvas, "image/webp", 0.8);
-  let contentType = "image/webp";
-  if (!blob) {
-    blob = await canvasParaBlob(canvas, "image/jpeg", 0.8);
-    contentType = "image/jpeg";
-  }
-  const base64 = await blobParaBase64(blob);
-  return { base64, contentType, sizeBytes: blob.size };
-}
-
 async function onSalvar(e) {
   e.preventDefault();
   const btn = document.getElementById("salvarForm");
   document.getElementById("erroForm").innerHTML = "";
 
-  const urlManual = document.getElementById("campoImagemUrl").value.trim();
-  if (!urlManual && !arquivoComprimido) {
-    mostrarErroForm("Informe um link de imagem ou envie uma foto.");
-    return;
-  }
-
   btn.disabled = true;
   btn.innerHTML = '<span class="spinner"></span>Salvando...';
 
   try {
-    let imagem = urlManual;
-    if (arquivoComprimido) {
-      const up = await chamarAPI("/api/upload", {
-        method: "POST",
-        body: JSON.stringify({
-          filename: arquivoComprimido.filename,
-          contentBase64: arquivoComprimido.base64,
-          contentType: arquivoComprimido.contentType,
-        }),
-      });
-      imagem = up.path;
-    }
-
     const payload = {
       nome: document.getElementById("campoNome").value,
       categoria: document.getElementById("campoCategoria").value,
       preco: document.getElementById("campoPreco").value,
       descricao: document.getElementById("campoDescricao").value,
       disponivel: document.getElementById("campoDisponivel").checked,
-      imagem,
+      imagem: document.getElementById("campoImagemUrl").value.trim(),
     };
 
     if (editandoId !== null) {

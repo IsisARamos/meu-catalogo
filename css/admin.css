@@ -196,7 +196,6 @@ table.admin-table {
 }
 .campo input[type="text"],
 .campo input[type="number"],
-.campo input[type="file"],
 .campo select,
 .campo textarea {
   width: 100%;
@@ -212,21 +211,6 @@ table.admin-table {
 .campo textarea { resize: vertical; min-height: 70px; }
 .campo-toggle { display: flex; align-items: center; gap: 8px; }
 .campo-toggle label { margin-bottom: 0; }
-.campo-imagem-preview {
-  margin-top: 8px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 12px;
-  color: var(--cinza);
-}
-.campo-imagem-preview img {
-  width: 48px; height: 48px;
-  object-fit: cover;
-  border-radius: 6px;
-  border: 1px solid var(--borda);
-}
-
 .form-acoes { display: flex; gap: 10px; margin-top: 18px; }
 .form-acoes .btn { flex: 1; }
 
