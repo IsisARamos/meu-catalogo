@@ -550,6 +550,10 @@ body {
   transition: background .2s;
 }
 .dark-toggle:hover { background: rgba(0,0,0,.7); }
+.dark-toggle svg { width: 17px; height: 17px; }
+.dark-toggle .icone-sol { display: none; }
+body.dark .dark-toggle .icone-lua { display: none; }
+body.dark .dark-toggle .icone-sol { display: block; }
 
 /* ===== TOAST ===== */
 .toast {

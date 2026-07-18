@@ -154,8 +154,6 @@ function initDarkMode() {
     const isDark = document.body.classList.contains("dark");
     aplicarCoresHeader(isDark);
     localStorage.setItem("darkMode", isDark ? "1" : "0");
-    const icon = document.querySelector("#darkToggle i");
-    icon.className = isDark ? "fas fa-sun" : "fas fa-moon";
   });
 }
 
